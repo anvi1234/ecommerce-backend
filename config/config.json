@@ -1,0 +1,12 @@
+{
+    "development":{
+        "MONGODB_URI":"mongodb+srv://Rasanwala:Rasan123@cluster0.ibk4857.mongodb.net/Rasanwala?retryWrites=true&w=majority",
+        "JWT_SECRET":"SECRET123",
+        "JWT_EXPIRE": "24h"
+    },
+    "production":{
+        "MONGODB_URI":"mongodb+srv://Rasanwala:Rasan123@cluster0.ibk4857.mongodb.net/Rasanwala?retryWrites=true&w=majority",
+        "JWT_SECRET":"SECRET123",
+        "JWT_EXPIRE": "24h"
+    }
+}
