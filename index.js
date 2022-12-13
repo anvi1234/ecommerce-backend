@@ -22,6 +22,8 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
   next();
 });
+
+app.use(express.static(__dirname + '/dist'));
 // app.use(cors({ origin: ["https://ashugallery12.herokuapp.com"], 
 
 // methods:["GET","POST","DELETE","PUT"],
