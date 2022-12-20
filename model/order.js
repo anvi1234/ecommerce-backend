@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const { any } = require('webidl-conversions');
 
 var orderHistorySchema = new mongoose.Schema({
    id:String,
@@ -8,6 +9,7 @@ var orderHistorySchema = new mongoose.Schema({
    date:String,
    type:String, 
    totalAmount:String,
+   changeAdress:Object,
    uploaded:{type:Date,default:Date.now},
    
 })

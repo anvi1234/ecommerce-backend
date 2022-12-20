@@ -33,7 +33,7 @@ const mongoose = require('mongoose');
 
 module.exports.deleteToDo = (req,res,next)=>{
     let id = req.params.id;
-    Product.findByIdAndRemove({ _id: req.params.id }, function (err,expense) {
+    Todo.findByIdAndRemove({ _id: req.params.id }, function (err,expense) {
       if (err) res.json(err);
       else res.json('Product Deleted Successfully');
       });

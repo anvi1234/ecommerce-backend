@@ -13,6 +13,7 @@ module.exports.register = (req,res,next) =>{
     user.pinCode = req.body.pinCode
     user.email = req.body.email 
     user.password = req.body.password
+    user.changeAddress = req.body.changeAddress
     user.save((err,doc)=>{
         if(!err)
         res.send(doc);
@@ -85,6 +86,7 @@ module.exports.getUser = (req,res,next)=>{
         user.pinCode = req.body.pinCode
         user.email = req.body.email 
         user.password = req.body.password
+        user.changeAddress = req.body.changeAddress
         user.save().then(emp => {
        res.json({message:'User Updated Successfully',
       "user":user});

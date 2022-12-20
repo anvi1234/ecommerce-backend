@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
     order.date = req.body.date,
     order.type = req.body.type,
     order.totalAmount = req.body.totalAmount
+    order.changeAdress = req.body.changeAdress
     if(req.body?.cartId){
         Cart.findByIdAndRemove({ _id: req.body.cartId }, function (err,expense) {
             if (err) res.json(err);
@@ -73,15 +74,15 @@ module.exports.deleteOrderHistory = (req,res,next)=>{
           if (!cart)
           return next(new Error('Unable To Find Expenses With This Id'));
           else {
-          
             cart.userId = req.body.userId,
             cart.cartArray = req.body.cartArray,
-            cart.status = req.body.status
-            cart.date = req.body.date
+            cart.status = req.body.status,
+            cart.date = req.body.date,
             cart.type = req.body.type,
-            cart.totalAmount = req.body.totalAmount
+            cart.totalAmount = req.body.totalAmount,
+            cart.changeAdress = req.body.changeAdress
             cart.save().then(emp => {
-          res.json('Product Updated Successfully');
+            res.json('Product Updated Successfully');
           })
           .catch(err => {
           res.status(400).send("Unable To Update Expenses");
