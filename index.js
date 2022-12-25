@@ -1,7 +1,7 @@
 require("./config/config");
 require("./model/db");
 require('./config/passportConfig');
-
+const compression = require('compression')
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 const { links } = require("express/lib/response");
 
 var app = express()
+app.use(compression())
 
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(passport.initialize());
@@ -22,8 +23,6 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
   next();
 });
-
-app.use(express.static(__dirname + '/dist'));
 // app.use(cors({ origin: ["https://ashugallery12.herokuapp.com"], 
 
 // methods:["GET","POST","DELETE","PUT"],
@@ -49,4 +48,3 @@ if(process.env.NODE_ENV==="production"){
 }
 
 app.listen(PORT,()=> console.log(`server started at port :${PORT}`))
-module.exports = app;

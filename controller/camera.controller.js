@@ -39,7 +39,7 @@ module.exports.getCamera = (req,res,next)=>{
 
 module.exports.deleteCamera = (req,res,next)=>{
     
- let id = req.params.id;
+    let id = req.params.id;
     Camera.findByIdAndRemove({ _id: req.params.id }, function (err,expense) {
       if (err) res.json(err);
       else res.json('Product Deleted Successfully');

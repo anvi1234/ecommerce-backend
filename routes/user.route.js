@@ -6,6 +6,7 @@
   const user = require('../controller/user.controller');
   router.post("/register", user.register);
   router.post('/authenticate',user.authenticate);
+  router.post('/mobile-validation',user.checkMobileValidation);
   router.get('/cngSite',jwtHelper.verifyJwtToken,user.cngSite)
   router.get("/get-user-by-id/:id", user.getUserById);
   router.get("/get-user", user.getUser);

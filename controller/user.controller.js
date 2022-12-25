@@ -4,6 +4,7 @@ const _= require('lodash')
 const User = mongoose.model('User')
 
 module.exports.register = (req,res,next) =>{
+    User.init() // <- document gets generated
     var user = new User()
     user.userName = req.body.userName
     user.mobileNo  = req.body.mobileNo 
@@ -11,37 +12,60 @@ module.exports.register = (req,res,next) =>{
     user.address2 = req.body.address2 
     user.district = req.body.district 
     user.pinCode = req.body.pinCode
-    user.email = req.body.email 
-    user.password = req.body.password
+    user.emailName = req.body.emailName
+    // user.password = req.body.password
     user.changeAddress = req.body.changeAddress
     user.save((err,doc)=>{
+        console.log("err",err)
         if(!err)
         res.send(doc);
         else{
-            if(err.code==11000){
-                console.log("Duplicate Email Found");
-            }
-            else{
-                return next(err);
-            }
+            res.send(err)
         }
     })
 }
 
+module.exports.checkMobileValidation=(req,res,next)=>{
+    User.findOne({mobileNo:String(req.body.mobileNo)},
+        (err,user,info)=>{
+            console.log("user",req.body.mobileNo)
+            if(!user){
+                return res.status(404).json({
+                    status:404, message:"user not found"
+                  })
+            }
+          
+        else if(user) {
+            return res.status(200).json({
+                status:200, message:"Mobile number already exist ,Please login!!"
+            
+            })
+        }
+    
+      else{
+        return res.status(404).json(info)
+      } 
+    })
+    }
+
+
 
 module.exports.authenticate=(req,res,next)=>{
-    passport.authenticate('local',(err,user,info)=>{
-    if(err)
-    return res.status(400).json(err);
-    else if(user) 
-    
-    return res.status(200).json({
+    User.findOne({mobileNo:req.body.mobileNo},
+        (err,user,info)=>{
+            console.log("user",user)
+            if(!user)
+            return res.status(404).json({
+                status:false,message:"User not found,Please Register !!"
+            })
+        else if(user) 
+      return res.status(200).json({
         "token":user.generateJwt(),
         "user":user
     
     })
-    else return res.status(404).json(info)
-    })(req,res)
+      else return res.status(404).json(info)
+      })(req,res)
     }
     
 
@@ -84,8 +108,8 @@ module.exports.getUser = (req,res,next)=>{
         user.address2 = req.body.address2 
         user.district = req.body.district 
         user.pinCode = req.body.pinCode
-        user.email = req.body.email 
-        user.password = req.body.password
+        user.emailName = req.body.emailName
+        // user.password = req.body.password
         user.changeAddress = req.body.changeAddress
         user.save().then(emp => {
        res.json({message:'User Updated Successfully',
@@ -114,7 +138,7 @@ module.exports.getUser = (req,res,next)=>{
                 })
               else
                 return res.status(200).json({
-                    status:true,user: _.pick(user,['userName','email'])
+                    status:true,user: _.pick(user,['mobileNo','mobileNo'])
                 })
             }
             )

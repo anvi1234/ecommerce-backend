@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var userSchema = new mongoose.Schema({
-    _id:{
-        type: ObjectId,
+    id:{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'OrderHistory',
        
     },
@@ -28,16 +28,16 @@ var userSchema = new mongoose.Schema({
     },
     
     pinCode:{
-        type:Number
+        type:String
     },
    
-    email:{
+    emailName:{
         type:String,
-        unique:true
-    },
-    password:{
-        type:String,
-     },
+        unique: false
+ },
+    // password:{
+    //     type:String,
+    //  },
      changeAddress:{
         type:Array
      }
