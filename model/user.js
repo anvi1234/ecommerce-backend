@@ -30,9 +30,6 @@ var userSchema = new mongoose.Schema({
     pinCode:{
         type:String
     },
-      // password:{
-    //     type:String,
-    //  },
      changeAddress:{
         type:Array
      }

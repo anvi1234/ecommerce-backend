@@ -17,9 +17,9 @@ module.exports.register = (req,res,next) =>{
         console.log("err",err)
         if(!err)
         res.send(doc);
-        else{
-            res.send(err)
-        }
+         else{
+                return next(err);
+            }
     })
 }
 
