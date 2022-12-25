@@ -30,12 +30,7 @@ var userSchema = new mongoose.Schema({
     pinCode:{
         type:String
     },
-   
-    emailName:{
-        type:String,
-        unique: false
- },
-    // password:{
+      // password:{
     //     type:String,
     //  },
      changeAddress:{

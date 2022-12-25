@@ -12,8 +12,6 @@ module.exports.register = (req,res,next) =>{
     user.address2 = req.body.address2 
     user.district = req.body.district 
     user.pinCode = req.body.pinCode
-    user.emailName = req.body.emailName
-    // user.password = req.body.password
     user.changeAddress = req.body.changeAddress
     user.save((err,doc)=>{
         console.log("err",err)
@@ -108,8 +106,6 @@ module.exports.getUser = (req,res,next)=>{
         user.address2 = req.body.address2 
         user.district = req.body.district 
         user.pinCode = req.body.pinCode
-        user.emailName = req.body.emailName
-        // user.password = req.body.password
         user.changeAddress = req.body.changeAddress
         user.save().then(emp => {
        res.json({message:'User Updated Successfully',
